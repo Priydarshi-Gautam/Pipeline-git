@@ -7,7 +7,7 @@ pipeline
         stage("compile"){
             steps{
 
-                bat 'javac Test.java'
+                sh 'javac Test.java'
             }
         }
 
@@ -15,11 +15,26 @@ pipeline
 
             steps{
 
-                bat "java Test"
+                sh "java Test"
             }
         }
     }
 
-  
+    post{
+
+        always{
+            bat 'echo "always"'
+        }
+
+        success{
+            bat 'echo "build success"'
+        }
+
+        failure{
+
+            bat 'echo "build failed"'
+        }
+
+    }
     
 }
